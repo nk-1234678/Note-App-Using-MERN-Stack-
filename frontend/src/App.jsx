@@ -1,22 +1,35 @@
-import React, { useState } from "react"
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom"
-import Home from "./pages/Home/Home"
-import Login from "./pages/Login/Login"
-import Signup from "./pages/Signup/Signup"
-import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
+// src/App.jsx
+import  { useEffect } from "react";
+import { BrowserRouter, useRoutes } from "react-router-dom";
+import PublicRoutes from "./routes/PublicRoutes";
+import UserRoutes from "./routes/UserRoutes";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Import AOS
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+const AppRoutes = () => {
+  const routes = useRoutes([...PublicRoutes, ...UserRoutes]);
+  return routes;
+};
 
 const App = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800, // default animation duration in ms
+      once: true, // animate only once
+      offset: 100, // offset from the original trigger point
+    });
+  }, []);
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
+      <AppRoutes />
       <ToastContainer position="top-center" />
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default App
+export default App;

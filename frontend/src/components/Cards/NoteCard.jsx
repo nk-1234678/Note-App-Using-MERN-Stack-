@@ -1,7 +1,6 @@
-import React from "react"
-import { FaTags } from "react-icons/fa6"
-import { MdCreate, MdDelete, MdOutlinePushPin } from "react-icons/md"
-import moment from "moment"
+
+import { MdCreate, MdDelete, MdOutlinePushPin } from "react-icons/md";
+import moment from "moment";
 
 const NoteCard = ({
   title,
@@ -14,44 +13,57 @@ const NoteCard = ({
   onDelete,
 }) => {
   return (
-    <div className="border rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out">
-      <div className="flex items-center justify-between">
-        <div>
-          <h6 className="text-sm font-medium">{title}</h6>
-          <span className="text-xs text-green-700">
+    <div className="rounded-2xl p-5 bg-gradient-to-br from-violet-50 via-white to-violet-100 shadow-md hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer max-w-full overflow-hidden">
+      {/* Header with title & pin */}
+      <div className="flex items-start justify-between">
+        <div className="max-w-[85%]">
+          <h2 className="text-lg font-semibold text-slate-800 truncate">
+            {title}
+          </h2>
+          <p className="text-xs text-blue-500 mt-1">
             {moment(date).format("Do MMM YYYY")}
-          </span>
+          </p>
         </div>
 
         <MdOutlinePushPin
-          className={`icon-btn ${
-            isPinned ? "text-[#2B85FF] " : "text-slate-300"
+          className={`text-xl transition-colors duration-300 ${
+            isPinned ? "text-blue-500" : "text-gray-300 hover:text-blue-400"
           }`}
           onClick={onPinNote}
         />
       </div>
 
-      <p className="text-xs text-slate-600 mt-2">{content?.slice(0, 60)}</p>
+      {/* Content */}
+      <p className="text-sm text-slate-600 mt-3 line-clamp-4">
+        {content}
+      </p>
 
-      <div className="flex items-center justify-between mt-2">
-        <div className="text-xs text-slate-500">
-          {tags.map((item) => `#${item} `)}
+      {/* Tags & actions */}
+      <div className="flex items-center justify-between mt-4">
+        <div className="flex flex-wrap gap-2">
+          {tags.map((item, i) => (
+            <span
+              key={i}
+              className="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full"
+            >
+              {item}
+            </span>
+          ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3 text-xl">
           <MdCreate
-            className="icon-btn hover:text-green-600"
+            className="hover:text-green-500 transition-colors duration-200"
             onClick={onEdit}
           />
-
           <MdDelete
-            className="icon-btn hover:text-red-500"
+            className="hover:text-red-500 transition-colors duration-200"
             onClick={onDelete}
           />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NoteCard
+export default NoteCard;

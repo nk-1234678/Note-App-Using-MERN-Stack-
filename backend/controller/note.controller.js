@@ -170,3 +170,36 @@ export const searchNote = async (req, res, next) => {
     next(error)
   }
 }
+
+
+export const updateNoteTags = async (req, res, next) => {
+  const noteId = req.params.noteId;
+  const { tags } = req.body;
+
+  if (!tags || !Array.isArray(tags)) {
+    return next(errorHandler(400, "Tags must be a valid array"));
+  }
+
+  try {
+    const note = await Note.findById(noteId);
+
+    if (!note) {
+      return next(errorHandler(404, "Note not found"));
+    }
+
+    if (req.user.id !== note.userId) {
+      return next(errorHandler(401, "You can only update your own note!"));
+    }
+
+    note.tags = tags;
+    await note.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Tags updated successfully",
+      note,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

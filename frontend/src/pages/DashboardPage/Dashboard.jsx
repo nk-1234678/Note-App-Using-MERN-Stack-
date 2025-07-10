@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import  { useEffect, useState } from "react"
 import NoteCard from "../../components/Cards/NoteCard"
 import { MdAdd } from "react-icons/md"
 import Modal from "react-modal"
@@ -181,7 +181,7 @@ const Home = () => {
       </div>
 
       <button
-        className="w-16 h-16 flex items-center justify-center rounded-2xl bg-[#2B85FF] hover:bg-blue-600 absolute right-10 bottom-10"
+        className="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 to-violet-700 hover:opacity-80 absolute right-10 bottom-10"
         onClick={() => {
           setOpenAddEditModal({ isShown: true, type: "add", data: null })
         }}

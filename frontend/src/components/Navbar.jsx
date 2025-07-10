@@ -1,8 +1,10 @@
-import React, { useState } from "react"
+import  { useState } from "react"
 import SearchBar from "./SearchBar/SearchBar"
 import ProfileInfo from "./Cards/ProfileInfo"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
+import PropTypes from "prop-types"
+
 import { toast } from "react-toastify"
 import {
   signInSuccess,
@@ -70,6 +72,15 @@ const Navbar = ({ userInfo, onSearchNote, handleClearSearch }) => {
       <ProfileInfo userInfo={userInfo} onLogout={onLogout} />
     </div>
   )
+}
+
+
+Navbar.propTypes = {
+  userInfo: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired,
+  onSearchNote: PropTypes.func.isRequired,
+  handleClearSearch: PropTypes.func.isRequired,
 }
 
 export default Navbar

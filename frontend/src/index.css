@@ -19,7 +19,7 @@
   }
 
   .btn-primary {
-    @apply w-full text-sm bg-[#2B85FF] text-white p-2 rounded my-1 hover:bg-blue-700;
+    @apply w-full text-sm bg-gradient-to-br from-slate-900 to-violet-700 text-white p-2 rounded my-1 hover:bg-gradient-to-br from-blue-500 to-purple-600;
   }
 
   .icon-btn {
